@@ -13,7 +13,7 @@ app.use(cors())
 
 app.use('/', router)
 
-const CONNECTION_URL = process.env.MONGO_DB_URL || 'mongodb+srv://pictalesadmin:pictalesadmin123@pictales.o132ha7.mongodb.net/?retryWrites=true&w=majority'
+const CONNECTION_URL = process.env.MONGO_DB_URL || 'mongodb+srv://<username>:<password>@pictales.o132ha7.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 8000
 
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } }
