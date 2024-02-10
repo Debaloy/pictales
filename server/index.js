@@ -3,7 +3,6 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import 'dotenv/config'
-require('dotenv').config()
 
 import router from './routes/posts.js'
 
