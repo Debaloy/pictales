@@ -2,6 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import 'dotenv/config'
+require('dotenv').config()
 
 import router from './routes/posts.js'
 
@@ -13,8 +15,8 @@ app.use(cors())
 
 app.use('/', router)
 
-const CONNECTION_URL = process.env.MONGO_DB_URL || 'mongodb+srv://<username>:<password>@pictales.o132ha7.mongodb.net/?retryWrites=true&w=majority'
-const PORT = process.env.PORT || 8000
+const CONNECTION_URL = process.env.MONGO_DB_URL
+const PORT = process.env.PORT
 
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } }
 
