@@ -14,12 +14,9 @@ app.use(cors())
 
 app.use('/posts', postRoutes)
 
-const CONNECTION_URL = MONGO_DB_URL
-const PORT = PORT
-
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
-mongoose.connect(CONNECTION_URL, clientOptions)
+mongoose.connect(MONGO_DB_URL, clientOptions)
 .then(() => app.listen(PORT, () => {
     console.log("Connected to MongoDB Cluster")
     console.log(`Server running on PORT: ${PORT}`)

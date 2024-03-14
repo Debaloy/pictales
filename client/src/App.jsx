@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch } from 'react-redux'
+import React from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Navbar from "./components/Navbar/Navbar"
-import Posts from "./components/Posts/Posts"
-import Form from "./components/Form/Form"
-
-import { getPosts } from './actions/posts.js'
+import Home from "./components/Home/Home"
+import Auth from "./components/Auth/Auth"
 
 function App() {
-  const [currentId, setCurrentId] = useState(null)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getPosts())
-  }, [dispatch])
-
   return (
-    <div
-      className="w-full h-screen px-10 py-4"
-    >
-      <Navbar />
-
+    <BrowserRouter>
       <div
-        className="grid grid-cols-2 gap-2 py-4"
+        className="w-full h-screen px-10 py-4"
       >
-        <Posts setCurrentId={setCurrentId} />
-        <Form currentId={currentId} setCurrentId={setCurrentId} />
+        <Navbar />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   )
 }
 
