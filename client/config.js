@@ -1,1 +1,1 @@
-export const GOOGLE_CLIENT_ID = "enter your google app id"
+export const GOOGLE_CLIENT_ID = ""

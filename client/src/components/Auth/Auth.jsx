@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useGoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -12,6 +13,8 @@ const Auth = () => {
     fname: '', lname: '', email: '', password: ''
   })
 
+  const navigate = useNavigate()
+
   const [accessToken, setAccessToken] = useState('')
   const [profileObj, setProfileObj] = useState({})
   const dispatch = useDispatch()
@@ -22,12 +25,11 @@ const Auth = () => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: (codeRes) => {
-        console.log(codeRes)
         setAccessToken(codeRes?.access_token)
         axios
-        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`, {
+        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeRes?.access_token}`, {
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${codeRes?.access_token}`,
                 Accept: 'application/json'
             }
         })
@@ -36,9 +38,10 @@ const Auth = () => {
             try {
                 const action = {
                     type: AUTH,
-                    data: { profileObj, accessToken }
+                    data: { profileObj: res.data, accessToken: codeRes?.access_token }
                 }
                 dispatch(action)
+                navigate('/')
             } catch (err) {
                 console.log(err)
             }
